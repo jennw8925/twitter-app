@@ -6,22 +6,28 @@ import fullHeart from '../Images/red_heart.png';
 const Counter = () => {
 
     const [count, setCount] = useState(0);
+    const showHeart = [emptyHeart, fullHeart]
+    const i = count;
 
+    const changeLike = () =>{
+        if (count === 0){
+            setCount (count+1);
+        }   
+        if (count === 1){
+            setCount(count-1);
+        }
+    }
     console.log(count);
+    console.log(showHeart);
 
     return(
         <div> 
-            <p> {count} </p>
-            <button onClick = {() => (setCount(count+1))}> 
-                <img id = "fullHeart" src = {fullHeart}/>
+            <button id = "likeButton" onClick = {changeLike}> 
+                <img id = "heart" src = {showHeart[i]}/> {count}
                 </button>
-            <button onClick = {() => (setCount(count-1))}> 
-            <img id = "emptyHeart" src = {emptyHeart}/>  </button>
 
         </div>
-
     )
-
-}
+ }
 
 export default Counter;

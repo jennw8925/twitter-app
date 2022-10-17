@@ -1,7 +1,11 @@
 #feed{
-    background-color: lightgray;
-    max-width: 800px;
+    background-color: lightblue;
+    max-width: 1000px;
     margin: 0 auto;
     padding-top: 10px;
     margin-top: 10px;
+}
+
+#feedTitle{
+    margin-bottom: 20px;
 }

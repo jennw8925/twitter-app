@@ -1,7 +1,7 @@
-#emptyHeart{
-    max-width: 15px;
-}
-
-#fullHeart{
+#heart{
     max-width: 10px;
+}
+#likeButton{
+    border-color: lightskyblue;
+    border-radius: 0%;
 }

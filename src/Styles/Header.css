@@ -1,3 +1,24 @@
 #logo{
     max-width: 50px;
 }
+
+#header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    background-color: lightblue;
+    
+}
+
+.tabs{
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    padding-left: 20px;
+    padding-right: 20px;
+    border-color: lightskyblue;
+}
+
+

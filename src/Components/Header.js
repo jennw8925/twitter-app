@@ -9,9 +9,14 @@ const Header = (props) => {
 
 
     return (
-        <div>
+        <div id = "wholeHeader">
+            <div id = "header"> 
             <img id = "logo" src = {logo}/>
+            <button class = "tabs"> Latest </button>
+            <button class = "tabs"> Explore </button>
+            <button class = "tabs"> Settings </button>
             <b> Total Number of users: {numUsers} </b>
+            </div>
         </div>
     )
 }
