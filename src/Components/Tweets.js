@@ -16,8 +16,7 @@ const Tweets = (props) => {
             </div>
              </div>
             
-            <p id = 'tweet-text'> If you only do what you are told to do, you will always 
-            have to do what you are told to do. </p>
+            <p id = 'tweet-text'> {props.content}</p>
 
             <div id = "footer">
                 <p> {props.time}</p>

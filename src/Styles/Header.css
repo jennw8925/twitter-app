@@ -22,3 +22,8 @@
 }
 
 
+#header-buttons{
+    direction: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+}

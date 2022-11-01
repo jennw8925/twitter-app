@@ -4,8 +4,21 @@
     margin: 0 auto;
     padding-top: 10px;
     margin-top: 10px;
+    
 }
 
 #feedTitle{
     margin-bottom: 20px;
 }
+
+#tweet-creator{
+    padding-top: 30px;
+}
+
+#search-bar{
+    margin-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: mistyrose;
+}
+
