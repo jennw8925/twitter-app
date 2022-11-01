@@ -9,10 +9,13 @@
 
 #feedTitle{
     margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
 }
 
 #tweet-creator{
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #search-bar{
