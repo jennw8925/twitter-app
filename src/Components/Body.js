@@ -10,8 +10,8 @@ const Body = () => {
 //VARIABLES
   //define dates and times 
    const defaultDate = new Date();
-   const defDate = defaultDate.toLocaleDateString()
-   const defTime = defaultDate.toLocaleTimeString()
+   const defDate = defaultDate.toLocaleDateString();
+   const defTime = defaultDate.toLocaleTimeString();
 
   //define variables that will hold user input
    const [handle, setHandle] = useState(""); 
@@ -29,13 +29,13 @@ const Body = () => {
 //FUNCTIONS
   //useEffect created to call from API only when needed
    useEffect(() => {
-    axios.get('https://dog.ceo/api/breeds/image/random').then(
+    axios.get('https://dog.ceo/api/breeds/image/random').then( //only set image if the data is retrieved
       info => {setImg(info.data.message);}
     )}, [trigger]) 
 
   //function for adding tweets, implemented by Create button
    const addTweet = () => {
-     if (handle !== "" && author !== "" && content !== "") {
+     if (handle !== "" && author !== "" && content !== "") { //if statement to ensure there is something typed in all the boxes before creating tweet
       setTrigger(!trigger); //set random dog image with every new tweet
       setAllTweets([{handle: handle, author: author, date: defDate, time: defTime, content:content, likes:0, prof:img}, ...allTweets]); 
       setHandle(""); 
@@ -46,7 +46,7 @@ const Body = () => {
 
   //function for searching tweets given a user input
     const filterTweets = (match) => {
-        const result = allTweets.filter((tweet) => {
+        const result = allTweets.filter((tweet) => { //add all the matches to a temporary array
           if (match !== ""){ //if nothing typed into search bar, return none of the tweets
             return tweet.content.toLowerCase().includes(match.toLowerCase());
           }
@@ -56,7 +56,7 @@ const Body = () => {
     
   //function for clearing searched tweets
     const clearSearch = () => {
-      setFilteredTweets([]);
+      setFilteredTweets([]); //set filtered tweets array to an empty array
     }
 
 
