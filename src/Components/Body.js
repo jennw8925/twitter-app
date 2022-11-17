@@ -6,33 +6,34 @@ import axios from 'axios';
 
 
 const Body = () => {
-  
-   const init = []; 
+
+//VARIABLES
+  //define dates and times 
    const defaultDate = new Date();
    const defDate = defaultDate.toLocaleDateString()
    const defTime = defaultDate.toLocaleTimeString()
-   
- 
+
+  //define variables that will hold user input
    const [handle, setHandle] = useState(""); 
    const [author, setAuthor] = useState(""); 
    const [content, setContent] = useState(""); 
- 
-   const [allTweets, setAllTweets] = useState(init); 
+
+  //define arrays that will store created and searched tweets
+   const [allTweets, setAllTweets] = useState([]); 
    const [filteredTweets, setFilteredTweets] = useState([]); 
 
+  //define variables for useEffect and API
    const[trigger, setTrigger] = useState(false);
    const[img, setImg] = useState("");
 
+//FUNCTIONS
+  //useEffect created to call from API only when needed
    useEffect(() => {
-    // the .then() means code wait for API to respond/return data
     axios.get('https://dog.ceo/api/breeds/image/random').then(
-      //info is what we get back from url
-      info => {setImg(info.data.message);
-      }
-    )
-  }, [trigger]) //dependancy array
+      info => {setImg(info.data.message);}
+    )}, [trigger]) 
 
-
+  //function for adding tweets, implemented by Create button
    const addTweet = () => {
      if (handle !== "" && author !== "" && content !== "") {
       setTrigger(!trigger); //set random dog image with every new tweet
@@ -43,6 +44,7 @@ const Body = () => {
      }
    }
 
+  //function for searching tweets given a user input
     const filterTweets = (match) => {
         const result = allTweets.filter((tweet) => {
           if (match !== ""){ //if nothing typed into search bar, return none of the tweets
@@ -52,22 +54,23 @@ const Body = () => {
         setFilteredTweets(result);
     }
     
+  //function for clearing searched tweets
     const clearSearch = () => {
       setFilteredTweets([]);
     }
 
 
     return (
-
+      
       <div>
-
         <div id = "search-bar">
           <SearchBar onClick={(match) => filterTweets(match)}/>
           <button onClick= {clearSearch}> Clear Search </button>
           <br/>
           <b>Search results:</b> 
           {filteredTweets.map((tweet, i) => (
-          <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} prof={tweet.prof} date= {tweet.date} time = {tweet.time} key={i} />
+          <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} 
+          prof={tweet.prof} date= {tweet.date} time = {tweet.time} key={i}/>
           ))}
         </div>
 
@@ -80,14 +83,14 @@ const Body = () => {
           <button onClick={addTweet}>Create</button>
         </div>
         
-        
+
         <div id="feed">
           <h2 id="feedTitle">Your Twitter Feed</h2>
           {allTweets.map((tweet, i) => (
-            <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} prof={tweet.prof} date={tweet.date} time={tweet.time} key={i} />
+            <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} 
+            prof={tweet.prof} date={tweet.date} time={tweet.time} key={i}/>
           ))}
         </div>
-
 
     </div>
     )
