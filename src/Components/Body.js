@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Tweets from './Tweets.js';
 import SearchBar from './SearchBar.js';
 import "../Styles/Body.css";
-import logo from '../Images/bird.jpg'; 
+import axios from 'axios';
 
 
 const Body = () => {
-    //javascript outside return statement, if in 
-    //return statement, need curly braces 
-    // write a function to add a like
-    const init = [{handle:"@serenawilliams", author:"Serena Williams", content:"Submit a pitch to Serena Ventures!", likes:100, prof:logo}, 
-    {handle:"@IamSandraOh", author:"Sandra Oh", content:"Everyone should watch Killing Eve", likes:4000, prof:logo}]; 
+  
+   const init = []; 
+   const defaultDate = new Date();
+   const defDate = defaultDate.toLocaleDateString()
+   const defTime = defaultDate.toLocaleTimeString()
+   
  
    const [handle, setHandle] = useState(""); 
    const [author, setAuthor] = useState(""); 
@@ -18,37 +19,58 @@ const Body = () => {
  
    const [allTweets, setAllTweets] = useState(init); 
    const [filteredTweets, setFilteredTweets] = useState([]); 
- 
+
+   const[trigger, setTrigger] = useState(false);
+   const[img, setImg] = useState("");
+
+   useEffect(() => {
+    // the .then() means code wait for API to respond/return data
+    axios.get('https://dog.ceo/api/breeds/image/random').then(
+      //info is what we get back from url
+      info => {setImg(info.data.message);
+      }
+    )
+  }, [trigger]) //dependancy array
+
+
    const addTweet = () => {
      if (handle !== "" && author !== "" && content !== "") {
-       setAllTweets([{handle: handle, author: author, content:content, likes:0, prof:logo}, ...allTweets]); 
-       setHandle(""); 
-       setAuthor(""); 
-       setContent(""); 
+      setTrigger(!trigger); //set random dog image with every new tweet
+      setAllTweets([{handle: handle, author: author, date: defDate, time: defTime, content:content, likes:0, prof:img}, ...allTweets]); 
+      setHandle(""); 
+      setAuthor(""); 
+      setContent(""); 
      }
    }
 
     const filterTweets = (match) => {
         const result = allTweets.filter((tweet) => {
-          if (match !== ""){
+          if (match !== ""){ //if nothing typed into search bar, return none of the tweets
             return tweet.content.toLowerCase().includes(match.toLowerCase());
           }
         })
         setFilteredTweets(result);
     }
-    console.log(filteredTweets);
+    
+    const clearSearch = () => {
+      setFilteredTweets([]);
+    }
+
 
     return (
 
       <div>
+
         <div id = "search-bar">
           <SearchBar onClick={(match) => filterTweets(match)}/>
+          <button onClick= {clearSearch}> Clear Search </button>
+          <br/>
           <b>Search results:</b> 
           {filteredTweets.map((tweet, i) => (
-          <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} prof={tweet.prof} key={i} />
+          <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} prof={tweet.prof} date= {tweet.date} time = {tweet.time} key={i} />
           ))}
         </div>
-        
+
 
         <div id = "tweet-creator">
           <h4>Create a Tweet</h4>
@@ -57,11 +79,12 @@ const Body = () => {
           <input placeholder="Content" value={content} onChange={e => setContent(e.target.value)}></input>
           <button onClick={addTweet}>Create</button>
         </div>
-
+        
+        
         <div id="feed">
           <h2 id="feedTitle">Your Twitter Feed</h2>
           {allTweets.map((tweet, i) => (
-            <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} prof={tweet.prof} key={i} />
+            <Tweets handle={tweet.handle} author={tweet.author} content={tweet.content} likes={tweet.likes} prof={tweet.prof} date={tweet.date} time={tweet.time} key={i} />
           ))}
         </div>
 

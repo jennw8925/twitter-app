@@ -8,9 +8,7 @@ const SearchBar = (props) => {
         <div>
             <input value = {term} onChange = {e => setTerm(e.target.value)} placeholder = "Search term" ></input>
             <button onClick = {() => props.onClick(term)}> Search </button>
-
         </div>
-
     )
 }
 
