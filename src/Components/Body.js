@@ -53,6 +53,7 @@ const Body = () => {
         })
         setFilteredTweets(result);
     }
+    console.log(filteredTweets)
     
   //function for clearing searched tweets
     const clearSearch = () => {
