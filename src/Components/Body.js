@@ -27,7 +27,7 @@ const Body = () => {
    const[img, setImg] = useState("");
 
 //FUNCTIONS
-  //useEffect created to call from API only when needed
+  //useEffect created to call random dog image from API only when needed
    useEffect(() => {
     axios.get('https://dog.ceo/api/breeds/image/random').then( //only set image if the data is retrieved
       info => {setImg(info.data.message);}
